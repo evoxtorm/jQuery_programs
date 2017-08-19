@@ -1,0 +1,101 @@
+<html>
+<head>
+    <style type="text/css">
+
+      h1{
+        text-align: : center ;
+        text-decoration: underline;
+        color: green;
+      }
+
+        .imgStyle {
+            width: 100px;
+            height: 100px;
+            border: 3px solid grey;
+        }
+    </style>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#divId').on({
+                mouseover: function () {
+                    $(this).css({
+                        'cursor': 'hand',
+                        'border-Color': 'red'
+                    });
+                },
+                mouseout: function () {
+                    $(this).css({
+                        'cursor': 'default',
+                        'border-Color': 'grey'
+                    });
+                },
+                click: function () {
+                    var imageURL = $(this).attr('src');
+                    var effect = $('#selectImgEffect').val();
+                    var duration = $('#selectImgDuration').val() * 1000;
+
+                    if (effect == 'Slide') {
+                        $('#mainImage').slideUp(duration, function () {
+                            $(this).attr('src', imageURL);
+                        }).slideDown(duration);
+                    }
+                    else {
+                        $('#mainImage').fadeOut(duration, function () {
+                            $(this).attr('src', imageURL);
+                        }).fadeIn(duration);
+                    }
+                }
+            }, 'img');
+
+            var mainImageElement = $('#mainImage');
+            var height = parseInt(mainImageElement.attr('height'));
+            var width = parseInt(mainImageElement.attr('width'))
+
+            $('#btnEnlarge').click(function () {
+                height += 100;
+                width += 100;
+                mainImageElement.animate({ 'height': height, 'width': width });
+            });
+
+            $('#btnShrink').click(function () {
+                height -= 100;
+                width -= 100;
+                mainImageElement.animate({ 'height': height, 'width': width });
+            });
+        });
+    </script>
+</head>
+<body style="font-family:Arial">
+  <h1 align ="center"> Happy bday Manvi</h1>
+  <h2>Bless you</h2>
+    <p>Select Effect :
+    <select id="selectImgEffect">
+        <option value="Fade">Fade</option>
+        <option value="Slide">Slide</option>
+    </select>
+  </p>
+    Time in seconds:
+    <select id="selectImgDuration">
+        <option value="0.5">0.5</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <input id="btnEnlarge" type="button" value="Enlarge" />
+    <input id="btnShrink" type="button" value="Shrink" />
+    <br /><br />
+    <img id="mainImage" style="border:3px solid grey"
+    src="Images/manvi1.jpg" height="500" width="540" />
+<br />
+<div id="divId">
+   <img class="imgStyle" src="Images/manvi1.jpg" />
+   <img class="imgStyle" src="Images/manvi2.jpg" />
+   <img class="imgStyle" src="Images/manvi3.jpg" />
+   <img class="imgStyle" src="Images/manvi4.jpg" />
+   <img class="imgStyle" src="Images/manvi5.jpg" />
+</div>
+</body>
+</html>
